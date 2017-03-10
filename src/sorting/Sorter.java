@@ -6,29 +6,42 @@ import java.util.Comparator;
 public class Sorter<T extends Comparable<T>> {
 
 	public final void heapSort(final T[] array) {
-		BinaryHeap<T> heap = new BinaryHeap<>(array);
+		BinaryHeap<T> heap = new BinaryHeap<T>();
+		heap.buildHeap(array);
 		for (int i = heap.getHeapSize() - 1; i >= 1; i--) {
-			heap.swap(0, heap.getHeapSize() - 1);
+			heap.swap(array, 0, i);
 			heap.removeLast();
-			heap.heapify(0);
+			heap.heapify(array, 0);
 		}
 	}
 
-	public final void heapSort(final ArrayList<T> array) {
-		BinaryHeap<T> heap = new BinaryHeap<>(array);
+	public final void heapSort(final ArrayList<T> list) {
+		BinaryHeap<T> heap = new BinaryHeap<T>();
+		heap.buildHeap(list);
 		for (int i = heap.getHeapSize() - 1; i >= 1; i--) {
-			heap.swap(0, heap.getHeapSize() - 1);
+			heap.swap(list, 0, i);
 			heap.removeLast();
-			heap.heapify(0);
+			heap.heapify(list, 0);
 		}
 	}
 
 	public final void heapSort(final T[] array, final Comparator<T> comparator) {
-		BinaryHeap<T> heap = new BinaryHeap<>(array, comparator);
+		BinaryHeap<T> heap = new BinaryHeap<T>();
+		heap.buildHeap(array, comparator);
 		for (int i = heap.getHeapSize() - 1; i >= 1; i--) {
-			heap.swap(0, heap.getHeapSize() - 1);
+			heap.swap(array, 0, i);
 			heap.removeLast();
-			heap.heapify(0);
+			heap.heapify(array, 0, comparator);
+		}
+	}
+
+	public final void heapSort(final ArrayList<T> list, final Comparator<T> comparator) {
+		BinaryHeap<T> heap = new BinaryHeap<T>();
+		heap.buildHeap(list, comparator);
+		for (int i = heap.getHeapSize() - 1; i >= 1; i--) {
+			heap.swap(list, 0, i);
+			heap.removeLast();
+			heap.heapify(list, 0, comparator);
 		}
 	}
 }

@@ -1,44 +1,41 @@
 package sorting;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 public class BinaryHeap<T extends Comparable<T>> {
 
-	private ArrayList<T> heap;
 	private int heapSize = 0;
-	private Comparator<T> comparator = null;
 
-	public BinaryHeap(final T[] data) {
-		this.heap = new ArrayList<>(Arrays.asList(data));
-		this.heapSize = heap.size();
-		buildHeap();
+	public BinaryHeap() {
+		this.heapSize = 0;
 	}
 
-	public BinaryHeap(final ArrayList<T> data) {
-		this.heap = data;
-		this.heapSize = heap.size();
-		buildHeap();
+	public void buildHeap(final T[] array) {
+		this.heapSize = array.length;
+		for (int i = heapSize / 2; i >= 0; i--) {
+			heapify(array, i);
+		}
 	}
 
-	public BinaryHeap(final T[] data, final Comparator<T> comparator) {
-		this.heap = new ArrayList<>(Arrays.asList(data));
-		this.heapSize = heap.size();
-		this.comparator = comparator;
-		buildHeap();
+	public void buildHeap(final T[] array, final Comparator<T> comparator) {
+		this.heapSize = array.length;
+		for (int i = heapSize / 2; i >= 0; i--) {
+			heapify(array, i, comparator);
+		}
 	}
 
-	public BinaryHeap(final ArrayList<T> data, final Comparator<T> comparator) {
-		this.heap = data;
-		this.heapSize = heap.size();
-		this.comparator = comparator;
-		buildHeap();
+	public void buildHeap(final List<T> list) {
+		this.heapSize = list.size();
+		for (int i = heapSize / 2; i >= 0; i--) {
+			heapify(list, i);
+		}
 	}
 
-	public void buildHeap() {
-		for (int i = heapSize / 2 - 1; i >= 0; i--) {
-			heapify(i);
+	public void buildHeap(final List<T> list, final Comparator<T> comparator) {
+		this.heapSize = list.size();
+		for (int i = heapSize / 2; i >= 0; i--) {
+			heapify(list, i, comparator);
 		}
 	}
 
@@ -46,39 +43,88 @@ public class BinaryHeap<T extends Comparable<T>> {
 		return this.heapSize;
 	}
 
-	public void heapify(final int index) {
+	public void heapify(final List<T> list, final int index) {
 		int leftChild = 2 * index + 1;
 		int rightChild = 2 * index + 2;
 		int highestPriority = index;
-		if (this.comparator == null) {
-			if (leftChild < heapSize && heap.get(leftChild).
-					compareTo(heap.get(index)) > 0) {
-				highestPriority = leftChild;
-			}
-			if (rightChild < heapSize && heap.get(rightChild).
-					compareTo(heap.get(highestPriority)) > 0) {
-				highestPriority = rightChild;
-			}
-		} else {
-			if (leftChild < heapSize && this.comparator.
-					compare(heap.get(leftChild), heap.get(index)) > 0) {
-				highestPriority = leftChild;
-			}
-			if (rightChild < heapSize && this.comparator.
-					compare(heap.get(rightChild), heap.get(highestPriority)) > 0) {
-				highestPriority = rightChild;
-			}
+		if (leftChild < heapSize && list.get(leftChild).
+				compareTo(list.get(index)) > 0) {
+			highestPriority = leftChild;
+		}
+		if (rightChild < heapSize && list.get(rightChild).
+				compareTo(list.get(highestPriority)) > 0) {
+			highestPriority = rightChild;
 		}
 		if (highestPriority != index) {
-			swap(index, highestPriority);
-			heapify(highestPriority);
+			swap(list, index, highestPriority);
+			heapify(list, highestPriority);
 		}
 	}
 
-	public void swap(final int firstIndex, final int secondIndex) {
-		T temp = heap.get(firstIndex);
-		heap.set(firstIndex, heap.get(secondIndex));
-		heap.set(secondIndex, temp);
+	public void heapify(final List<T> list, final int index, final Comparator<T> comparator) {
+		int leftChild = 2 * index + 1;
+		int rightChild = 2 * index + 2;
+		int highestPriority = index;
+		if (leftChild < heapSize && comparator.
+				compare(list.get(leftChild), list.get(index)) > 0) {
+			highestPriority = leftChild;
+		}
+		if (rightChild < heapSize && comparator.
+				compare(list.get(rightChild), list.get(highestPriority)) > 0) {
+			highestPriority = rightChild;
+		}
+		if (highestPriority != index) {
+			swap(list, index, highestPriority);
+			heapify(list, highestPriority, comparator);
+		}
+	}
+
+	public void heapify(final T[] array, final int index) {
+		int leftChild = 2 * index + 1;
+		int rightChild = 2 * index + 2;
+		int highestPriority = index;
+		if (leftChild < heapSize && array[leftChild].
+				compareTo(array[index]) > 0) {
+			highestPriority = leftChild;
+		}
+		if (rightChild < heapSize && array[rightChild].
+				compareTo(array[highestPriority]) > 0) {
+			highestPriority = rightChild;
+		}
+
+		if (highestPriority != index) {
+			swap(array, index, highestPriority);
+			heapify(array, highestPriority);
+		}
+	}
+
+	public void heapify(final T[] array, final int index, final Comparator<T> comparator) {
+		int leftChild = 2 * index + 1;
+		int rightChild = 2 * index + 2;
+		int highestPriority = index;
+		if (leftChild < heapSize && comparator.compare(array[leftChild], array[index]) > 0) {
+			highestPriority = leftChild;
+		}
+		if (rightChild < heapSize && comparator.compare(array[rightChild], array[highestPriority]) > 0) {
+			highestPriority = rightChild;
+		}
+
+		if (highestPriority != index) {
+			swap(array, index, highestPriority);
+			heapify(array, highestPriority, comparator);
+		}
+	}
+
+	public void swap(final T[] array, final int firstIndex, final int secondIndex) {
+		T temp = array[firstIndex];
+		array[firstIndex] = array[secondIndex];
+		array[secondIndex] = temp;
+	}
+
+	public void swap(final List<T> list, final int firstIndex, final int secondIndex) {
+		T temp = list.get(firstIndex);
+		list.set(firstIndex, list.get(secondIndex));
+		list.set(secondIndex, temp);
 	}
 
 	public void removeLast() {
