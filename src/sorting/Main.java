@@ -22,12 +22,18 @@ public class Main {
 		fruits[2] = orange;
 		fruits[3] = banana;
 
-		Sortings.mergeSort(fruits, 0, fruits.length - 1);
-		int i = 0;
-		for(Fruit temp: fruits){
-		   System.out.println("fruits " + ++i + " : " + temp.getFruitName() +
-			", Quantity : " + temp.getQuantity());
+		Integer numbers[] = { 4, 15, 16, 50, 8, 23, 42, 108 };
+		Sortings.insertionSort(numbers);
+		for(Integer temp: numbers){
+		   System.out.print(temp + " ");
 		}
+
+//		Sortings.mergeSort(fruits, 0, fruits.length - 1);
+//		int i = 0;
+//		for(Fruit temp: fruits){
+//		   System.out.println("fruits " + ++i + " : " + temp.getFruitName() +
+//			", Quantity : " + temp.getQuantity());
+//		}
 
 //		sorter.heapSort(fruits);
 //		int i = 0;

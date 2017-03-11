@@ -46,6 +46,44 @@ public class Sortings<T extends Comparable<T>> {
 		}
 	}
 
+	public static <T extends Comparable<T>> void selectionSort(final T[] array) {
+		for (int i = 0; i < array.length; i++) {
+			int index = i;
+			for (int j = i + 1; j < array.length; j++) {
+				if (array[j].compareTo(array[index]) < 0) {
+					index = j;
+				}
+			}
+			swap(array, i, index);
+		}
+	}
+
+	private static<T extends Comparable<T>> void swap(final T[] array, final int ind1, final int ind2) {
+		T temp = array[ind1];
+		array[ind1] = array[ind2];
+		array[ind2] = temp;
+	}
+
+	public static <T extends Comparable<T>> void bubbleSort(final T[] array) {
+		for (int i = 1; i < array.length; i++) {
+			for (int j = i - 1; j >= 0; j--) {
+				if (array[j + 1].compareTo(array[j]) < 0) {
+					swap(array, j, j + 1);
+				}
+			}
+		}
+	}
+
+	public static <T extends Comparable<T>> void insertionSort(final T[] array) {
+		for (int i = 1; i < array.length; i++) {
+			for (int j = i - 1; j >= 0; j--) {
+				if (array[j + 1].compareTo(array[j]) < 0) {
+					swap(array, j, j + 1);
+				}
+			}
+		}
+	}
+
 	public static <T extends Comparable<T>> void mergeSort(final T[] array,
 			final int start, final int end) {
 		if (end > start) {
