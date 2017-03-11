@@ -40,10 +40,10 @@ public class Fruit implements Comparable<Fruit>{
 		int compareQuantity = compareFruit.getQuantity();
 
 		//ascending order
-		return this.quantity - compareQuantity;
+		//return this.quantity - compareQuantity;
 
 		//descending order
-		//return compareQuantity - this.quantity;
+		return compareQuantity - this.quantity;
 
 	}
 
@@ -57,10 +57,10 @@ public class Fruit implements Comparable<Fruit>{
 	      String fruitName2 = fruit2.getFruitName().toUpperCase();
 
 	      //ascending order
-	      return fruitName1.compareTo(fruitName2);
+	      //return fruitName1.compareTo(fruitName2);
 
 	      //descending order
-	      //return fruitName2.compareTo(fruitName1);
+	      return fruitName2.compareTo(fruitName1);
 	    }
 
 	};

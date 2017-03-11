@@ -8,8 +8,8 @@ import heap.BinaryHeap;
 
 public class Sortings<T extends Comparable<T>> {
 
-	public final void heapSort(final T[] array) {
-		BinaryHeap<T> heap = new BinaryHeap<T>();
+	public static <T extends Comparable<T>> void heapSort(final T[] array) {
+		BinaryHeap<T> heap = new BinaryHeap<T>(Comparator.<T>naturalOrder());
 		heap.buildHeap(array);
 		for (int i = heap.getHeapSize() - 1; i >= 1; i--) {
 			heap.swap(array, 0, i);
@@ -18,8 +18,8 @@ public class Sortings<T extends Comparable<T>> {
 		}
 	}
 
-	public final void heapSort(final List<T> list) {
-		BinaryHeap<T> heap = new BinaryHeap<T>();
+	public static <T extends Comparable<T>> void heapSort(final List<T> list) {
+		BinaryHeap<T> heap = new BinaryHeap<T>(Comparator.<T>naturalOrder());
 		heap.buildHeap(list);
 		for (int i = heap.getHeapSize() - 1; i >= 1; i--) {
 			heap.swap(list, 0, i);
@@ -28,23 +28,23 @@ public class Sortings<T extends Comparable<T>> {
 		}
 	}
 
-	public final void heapSort(final T[] array, final Comparator<T> comparator) {
-		BinaryHeap<T> heap = new BinaryHeap<T>();
-		heap.buildHeap(array, comparator);
+	public static <T extends Comparable<T>> void heapSort(final T[] array, final Comparator<T> comparator) {
+		BinaryHeap<T> heap = new BinaryHeap<T>(comparator);
+		heap.buildHeap(array);
 		for (int i = heap.getHeapSize() - 1; i >= 1; i--) {
 			heap.swap(array, 0, i);
 			heap.removeLast();
-			heap.heapify(array, 0, comparator);
+			heap.heapify(array, 0);
 		}
 	}
 
-	public final void heapSort(final List<T> list, final Comparator<T> comparator) {
-		BinaryHeap<T> heap = new BinaryHeap<T>();
-		heap.buildHeap(list, comparator);
+	public static <T extends Comparable<T>> void heapSort(final List<T> list, final Comparator<T> comparator) {
+		BinaryHeap<T> heap = new BinaryHeap<T>(comparator);
+		heap.buildHeap(list);
 		for (int i = heap.getHeapSize() - 1; i >= 1; i--) {
 			heap.swap(list, 0, i);
 			heap.removeLast();
-			heap.heapify(list, 0, comparator);
+			heap.heapify(list, 0);
 		}
 	}
 
@@ -118,5 +118,9 @@ public class Sortings<T extends Comparable<T>> {
 		for (int i = 0; i < length; i++) {
 			array[i + from] = auxilary.get(i);
 		}
+	}
+
+	public static <T extends Comparable<T>> void quickSort(final T[] array) {
+
 	}
 }
