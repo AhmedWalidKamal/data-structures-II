@@ -115,6 +115,20 @@ public class BinaryHeap<T extends Comparable<T>> {
 		}
 	}
 
+	public void siftUp(final List<T> list, int index) {
+		while (index > 0 && list.get(parent(index)).compareTo(list.get(index)) < 0) {
+			swap(list, index, parent(index));
+			index = parent(index);
+		}
+	}
+
+	private int parent(final int index) {
+		if (index == 0) {
+			return -1;
+		}
+		return (index - 1) / 2;
+	}
+
 	public void swap(final T[] array, final int firstIndex, final int secondIndex) {
 		T temp = array[firstIndex];
 		array[firstIndex] = array[secondIndex];
@@ -133,5 +147,21 @@ public class BinaryHeap<T extends Comparable<T>> {
 
 	public void addElement() {
 		this.heapSize++;
+	}
+
+	public void clear() {
+		this.heapSize = 0;
+	}
+
+	public T peek(final List<T> list) {
+		return list.get(0);
+	}
+
+	public T extractTop(final List<T> list) {
+		T topElement = list.get(0);
+		list.set(0, list.get(list.size() - 1));
+		removeLast();
+		heapify(list, 0);
+		return topElement;
 	}
 }
