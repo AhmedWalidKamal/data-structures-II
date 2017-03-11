@@ -1,8 +1,10 @@
-package sorting;
+package util;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
+import heap.BinaryHeap;
 
 public class Sortings<T extends Comparable<T>> {
 

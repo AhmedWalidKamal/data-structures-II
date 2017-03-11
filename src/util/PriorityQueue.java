@@ -1,7 +1,9 @@
-package sorting;
+package util;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import heap.BinaryHeap;
 
 public class PriorityQueue<T extends Comparable<T>> {
 

@@ -1,4 +1,4 @@
-package sorting;
+package heap;
 
 import java.util.Comparator;
 import java.util.List;
