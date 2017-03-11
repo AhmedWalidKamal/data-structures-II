@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Main {
 
 	public static void main(final String[] args) {
-		Sorter<Fruit> sorter = new Sorter<Fruit>();
+		Sortings<Fruit> sorter = new Sortings<Fruit>();
 
 		Fruit[] fruits = new Fruit[4];
 		ArrayList<Fruit> fruitList = new ArrayList<>();
@@ -22,36 +22,43 @@ public class Main {
 		fruits[2] = orange;
 		fruits[3] = banana;
 
-		sorter.heapSort(fruits);
+		Sortings.mergeSort(fruits, 0, fruits.length - 1);
 		int i = 0;
 		for(Fruit temp: fruits){
 		   System.out.println("fruits " + ++i + " : " + temp.getFruitName() +
 			", Quantity : " + temp.getQuantity());
 		}
 
-		System.out.println();
-		sorter.heapSort(fruitList);
-		i = 0;
-		for(Fruit temp: fruitList){
-		   System.out.println("fruits " + ++i + " : " + temp.getFruitName() +
-			", Quantity : " + temp.getQuantity());
-		}
-
-		System.out.println();
-		sorter.heapSort(fruits, Fruit.FruitNameComparator);
-		i = 0;
-		for(Fruit temp: fruits){
-		   System.out.println("fruits " + ++i + " : " + temp.getFruitName() +
-			", Quantity : " + temp.getQuantity());
-		}
-
-
-		System.out.println();
-		sorter.heapSort(fruitList, Fruit.FruitNameComparator);
-		i = 0;
-		for(Fruit temp: fruitList){
-		   System.out.println("fruits " + ++i + " : " + temp.getFruitName() +
-			", Quantity : " + temp.getQuantity());
-		}
+//		sorter.heapSort(fruits);
+//		int i = 0;
+//		for(Fruit temp: fruits){
+//		   System.out.println("fruits " + ++i + " : " + temp.getFruitName() +
+//			", Quantity : " + temp.getQuantity());
+//		}
+//
+//		System.out.println();
+//		sorter.heapSort(fruitList);
+//		i = 0;
+//		for(Fruit temp: fruitList){
+//		   System.out.println("fruits " + ++i + " : " + temp.getFruitName() +
+//			", Quantity : " + temp.getQuantity());
+//		}
+//
+//		System.out.println();
+//		sorter.heapSort(fruits, Fruit.FruitNameComparator);
+//		i = 0;
+//		for(Fruit temp: fruits){
+//		   System.out.println("fruits " + ++i + " : " + temp.getFruitName() +
+//			", Quantity : " + temp.getQuantity());
+//		}
+//
+//
+//		System.out.println();
+//		sorter.heapSort(fruitList, Fruit.FruitNameComparator);
+//		i = 0;
+//		for(Fruit temp: fruitList){
+//		   System.out.println("fruits " + ++i + " : " + temp.getFruitName() +
+//			", Quantity : " + temp.getQuantity());
+//		}
 	}
 }

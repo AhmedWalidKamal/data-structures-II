@@ -130,4 +130,8 @@ public class BinaryHeap<T extends Comparable<T>> {
 	public void removeLast() {
 		this.heapSize--;
 	}
+
+	public void addElement() {
+		this.heapSize++;
+	}
 }
