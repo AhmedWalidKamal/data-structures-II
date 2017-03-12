@@ -101,28 +101,17 @@ public class BinaryHeap<T extends Comparable<T>> {
 		return list.get(0);
 	}
 
-//	public T extractTop(final List<T> list, final Comparator<T> comparator) {
-//		T topElement = list.get(0);
-//		list.set(0, list.get(list.size() - 1));
-//		removeLast();
-//		list.remove(list.size() - 1);
-//		if (comparator == null) {
-//			heapify(list, 0);
-//		} else {
-//			heapify(list, 0, comparator);
-//		}
-//		return topElement;
-//	}
-
-	public void siftUp(final List<T> list, int index) {
-		while (index > 0 && list.get(parent(index)).compareTo(list.get(index)) > 0) {
-			swap(list, index, parent(index));
-			index = parent(index);
-		}
+	public T extractTop(final List<T> list) {
+		T topElement = list.get(0);
+		list.set(0, list.get(list.size() - 1));
+		removeLast();
+		list.remove(list.size() - 1);
+		heapify(list, 0);
+		return topElement;
 	}
 
-	public void siftUp(final List<T> list, int index, final Comparator<T> comparator) {
-		while (index > 0 && comparator.compare(list.get(parent(index)), list.get(index)) < 0) {
+	public void siftUp(final List<T> list, int index) {
+		while (index > 0 && comparator.compare(list.get(index), list.get(parent(index))) > 0) {
 			swap(list, index, parent(index));
 			index = parent(index);
 		}
