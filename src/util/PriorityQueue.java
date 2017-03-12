@@ -46,11 +46,6 @@ public class PriorityQueue<T extends Comparable<T>> {
 		return null;
 	}
 
-	//TODO: To be implemented
-	public void remove(final T element) {
-
-	}
-
 	public boolean isEmpty() {
 		return this.priorityQueue.isEmpty();
 	}

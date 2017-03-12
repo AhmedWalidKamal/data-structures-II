@@ -40,10 +40,10 @@ public class Fruit implements Comparable<Fruit>{
 		int compareQuantity = compareFruit.getQuantity();
 
 		//ascending order
-		return this.quantity - compareQuantity;
+		//return this.quantity - compareQuantity;
 
 		//descending order
-		//return compareQuantity - this.quantity;
+		return compareQuantity - this.quantity;
 
 	}
 

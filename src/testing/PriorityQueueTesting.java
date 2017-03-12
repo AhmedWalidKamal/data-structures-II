@@ -14,6 +14,7 @@ public class PriorityQueueTesting {
 		while (!prq.isEmpty()) {
 			System.out.println(prq.poll());
 		}
+
 		PriorityQueue<Fruit> pq = new PriorityQueue<>(Fruit.FruitNameComparator);
 		Fruit pineappale = new Fruit("Pineapple", "Pineapple description", 80);
 		Fruit apple = new Fruit("Apple", "Apple description", 100);
