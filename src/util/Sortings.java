@@ -28,7 +28,8 @@ public class Sortings<T extends Comparable<T>> {
 		}
 	}
 
-	public static <T extends Comparable<T>> void heapSort(final T[] array, final Comparator<T> comparator) {
+	public static <T extends Comparable<T>> void heapSort(final T[] array,
+			final Comparator<T> comparator) {
 		BinaryHeap<T> heap = new BinaryHeap<T>(comparator);
 		heap.buildHeap(array);
 		for (int i = heap.getHeapSize() - 1; i >= 1; i--) {
@@ -38,7 +39,8 @@ public class Sortings<T extends Comparable<T>> {
 		}
 	}
 
-	public static <T extends Comparable<T>> void heapSort(final List<T> list, final Comparator<T> comparator) {
+	public static <T extends Comparable<T>> void heapSort(final List<T> list,
+			final Comparator<T> comparator) {
 		BinaryHeap<T> heap = new BinaryHeap<T>(comparator);
 		heap.buildHeap(list);
 		for (int i = heap.getHeapSize() - 1; i >= 1; i--) {
@@ -60,7 +62,8 @@ public class Sortings<T extends Comparable<T>> {
 		}
 	}
 
-	private static<T extends Comparable<T>> void swap(final T[] array, final int ind1, final int ind2) {
+	private static<T extends Comparable<T>> void swap(final T[] array,
+			final int ind1, final int ind2) {
 		T temp = array[ind1];
 		array[ind1] = array[ind2];
 		array[ind2] = temp;
@@ -120,7 +123,26 @@ public class Sortings<T extends Comparable<T>> {
 		}
 	}
 
-	public static <T extends Comparable<T>> void quickSort(final T[] array) {
+	public static <T extends Comparable<T>> void quickSort(final T[] array,
+			final int start, final int end) {
+		if (start < end) {
+			int pivot = partition(array, start, end);
+			quickSort(array, start, pivot - 1);
+			quickSort(array, pivot + 1, end);
+		}
+	}
 
+	private static <T extends Comparable<T>> int partition(final T[] array,
+			final int start, final int end) {
+		T pivot = array[end];
+		int i = start - 1;
+		for (int j = start; j <= end - 1; j++) {
+			if (array[j].compareTo(pivot) <= 0) {
+				i++;
+				swap(array, i, j);
+			}
+		}
+		swap(array, i + 1, end);
+		return i + 1;
 	}
 }

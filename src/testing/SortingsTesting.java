@@ -22,7 +22,7 @@ public class SortingsTesting {
 		fruits[2] = orange;
 		fruits[3] = banana;
 
-		Sortings.heapSort(fruits);
+		Sortings.quickSort(fruits, 0, fruits.length - 1);
 		int i = 0;
 		for(Fruit temp: fruits){
 		   System.out.println("fruits " + ++i + " : " + temp.getFruitName() +
@@ -54,10 +54,10 @@ public class SortingsTesting {
 //			", Quantity : " + temp.getQuantity());
 //		}
 
-//		Integer[] numbers = {1, 2, 3, 1, 2, 5, 2, 1, 6, 7};
-//		Sortings.heapSort(numbers);
-//		for (Integer curr : numbers) {
-//			System.out.print(curr + " ");
+		Integer[] numbers = {1, 2, 3, 1, 2, 5, 2, 1, 6, 7};
+		Sortings.quickSort(numbers, 0, numbers.length - 1);
+		for (Integer curr : numbers) {
+			System.out.print(curr + " ");
 		}
 
 //		Sortings.selectionSort(fruits);
@@ -73,4 +73,6 @@ public class SortingsTesting {
 //		   System.out.println("fruits " + ++i + " : " + temp.getFruitName() +
 //			", Quantity : " + temp.getQuantity());
 //		}
+
+	}
 }
