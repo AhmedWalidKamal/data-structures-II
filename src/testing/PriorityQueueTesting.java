@@ -15,6 +15,7 @@ public class PriorityQueueTesting {
 			System.out.println(prq.poll());
 		}
 
+		// Fruit(<name>, <description>, <quantity>), fruitNameComparator sorts by name in ascending order.
 		PriorityQueue<Fruit> pq = new PriorityQueue<>(Fruit.FruitNameComparator);
 		Fruit pineappale = new Fruit("Pineapple", "Pineapple description", 80);
 		Fruit apple = new Fruit("Apple", "Apple description", 100);
