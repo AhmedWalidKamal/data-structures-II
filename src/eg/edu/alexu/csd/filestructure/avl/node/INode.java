@@ -17,4 +17,16 @@ public interface INode<T extends Comparable<T>> {
 	*/
 	T getValue();
 	void setValue(T value);
+
+	void setParent(INode<T> parent);
+
+	void setLeftChild(INode<T> leftChild);
+
+	void setRightChild(INode<T> rightChild);
+
+	INode<T> getParent();
+
+	int getHeight();
+
+	void updateHeight();
 }
