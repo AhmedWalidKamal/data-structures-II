@@ -5,43 +5,38 @@ import eg.edu.alexu.csd.filestructure.avl.node.Node;
 
 public class BST<T extends Comparable<T>> implements IBST<T> {
 
-	private INode<T> root = null;
+	protected INode<T> root = null;
 
 	public BST() {
 	}
 
 	public BST(final T rootValue) {
-		root.setValue(rootValue);
+		this.root = new Node<T>(rootValue);
 	}
 
 	@Override
-	public void insert(final T key) {
-		INode<T> newNode = new Node<T>(key);
+	public void insert(final INode<T> node) {
 		INode<T> currentNode = root, currentNodeParent = null;
 		while (currentNode != null) {
-			if (key.compareTo(currentNode.getValue()) <= 0) {
+			currentNodeParent = currentNode;
+			if (node.getValue().compareTo(currentNode.getValue()) <= 0) {
 				currentNode = currentNode.getLeftChild();
 			} else {
 				currentNode = currentNode.getRightChild();
 			}
-			currentNodeParent = currentNode.getParent();
 		}
-		newNode.setParent(currentNodeParent);
-		if (newNode.getParent() == null) {
-			this.root = newNode;
-		} else if (newNode.getValue().compareTo(newNode.getParent().getValue()) <= 0) {
-			newNode.getParent().setLeftChild(newNode);
+		node.setParent(currentNodeParent);
+		if (node.getParent() == null) {
+			this.root = node;
+		} else if (node.getValue().compareTo(node.getParent().getValue()) <= 0) {
+			node.getParent().setLeftChild(node);
 		} else {
-			newNode.getParent().setRightChild(newNode);
-		}
-		while (newNode != null) {
-			newNode.updateHeight();
-			newNode = newNode.getParent();
+			node.getParent().setRightChild(node);
 		}
 	}
 
 	@Override
-	public boolean delete(final T key) {
+	public boolean delete(final INode<T> node) {
 
 		return false;
 	}

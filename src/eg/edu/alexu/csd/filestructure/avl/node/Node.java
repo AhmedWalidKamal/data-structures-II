@@ -61,16 +61,16 @@ public class Node<T extends Comparable<T>> implements INode<T> {
 		return this.height;
 	}
 
+	@Override
 	public void updateHeight() {
-		if (leftChild != null && rightChild != null) {
-			this.height = Math.max(leftChild.getHeight(), rightChild.getHeight()) + 1;
-		} else if (leftChild != null) {
-			this.height = leftChild.getHeight() + 1;
-		} else if (rightChild != null) {
-			this.height = rightChild.getHeight() + 1;
-		} else {
-			this.height = 0;
+		this.height = Math.max(height(leftChild), height(rightChild)) + 1;
+	}
+
+	private int height(final INode<T> node) {
+		if (node == null) {
+			return -1;
 		}
+		return node.getHeight();
 	}
 
 	@Override

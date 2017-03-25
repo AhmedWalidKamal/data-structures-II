@@ -7,13 +7,13 @@ public interface IBST<T extends Comparable<T>> {
 	* Insert the given value using the key
 	* @param key the value to be inserted in the tree
 	*/
-	void insert(T key);
+	void insert(INode<T> node);
 	/**
 	* Delete the key (if exists)
 	* @param key the key of the node
 	* @return true if node deleted, false if not exists
 	*/
-	boolean delete(T key);
+	boolean delete(INode<T> node);
 	/**
 	* Search for a specific element using the key in the tree
 	* @param key the key of the node
