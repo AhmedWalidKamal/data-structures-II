@@ -16,7 +16,7 @@ public class BST<T extends Comparable<T>> implements IBST<T> {
 
 	@Override
 	public void insert(final INode<T> node) {
-		INode<T> currentNode = root, currentNodeParent = null;
+		INode<T> currentNode = this.root, currentNodeParent = null;
 		while (currentNode != null) {
 			currentNodeParent = currentNode;
 			if (node.getValue().compareTo(currentNode.getValue()) <= 0) {
@@ -36,17 +36,55 @@ public class BST<T extends Comparable<T>> implements IBST<T> {
 	}
 
 	@Override
-	public boolean delete(final INode<T> node) {
+	public boolean delete(INode<T> node) {
+		node = find(node.getValue());
+		if (node == null) {
+			return false;
+		}
+		if (node.getLeftChild() == null) {
+			transplant(node, node.getRightChild());
+		} else if (node.getRightChild() == null) {
+			transplant(node, node.getLeftChild());
+		} else {
+			INode<T> successor = minimum(node.getRightChild());
+			if (!successor.getParent().equals(node)) {
+				transplant(successor, successor.getRightChild());
+				successor.setRightChild(node.getRightChild());
+				successor.getRightChild().setParent(successor);
+			}
+			transplant(node, successor);
+			successor.setLeftChild(node.getLeftChild());
+			successor.getLeftChild().setParent(successor);
+		}
+		return true;
+	}
 
-		return false;
+	private void transplant(final INode<T> subtree1, final INode<T> subtree2) {
+		if (subtree1.getParent() == null) {
+			subtree2.setParent(null);
+		} else if (subtree1.getParent().getLeftChild().equals(subtree1)) {
+			subtree1.getParent().setLeftChild(subtree2);
+		} else {
+			subtree1.getParent().setRightChild(subtree2);
+		}
+		if (subtree2 != null) {
+			subtree2.setParent(subtree1.getParent());
+		}
 	}
 
 	@Override
 	public boolean search(final T key) {
-		INode<T> currentNode = root;
+		if (find(key) != null) {
+			return true;
+		}
+		return false;
+	}
+
+	private INode<T> find(final T key) {
+		INode<T> currentNode = this.root;
 		while (currentNode != null) {
 			if (currentNode.getValue().equals(key)) {
-				return true;
+				return currentNode;
 			}
 			if (key.compareTo(currentNode.getValue()) <= 0) {
 				currentNode = currentNode.getLeftChild();
@@ -54,12 +92,12 @@ public class BST<T extends Comparable<T>> implements IBST<T> {
 				currentNode = currentNode.getRightChild();
 			}
 		}
-		return false;
+		return null;
 	}
 
 	@Override
 	public int height() {
-		if (root == null) {
+		if (this.root == null) {
 			return -1;
 		}
 		return this.root.getHeight();
@@ -68,5 +106,50 @@ public class BST<T extends Comparable<T>> implements IBST<T> {
 	@Override
 	public INode<T> getTree() {
 		return this.root;
+	}
+
+	@Override
+	public INode<T> minimum(INode<T> root) {
+		while (root.getLeftChild() != null) {
+			root = root.getLeftChild();
+		}
+		return root;
+	}
+
+	@Override
+	public INode<T> maximum(INode<T> root) {
+		while (root.getRightChild() != null) {
+			root = root.getRightChild();
+		}
+		return root;
+	}
+
+	@Override
+	public INode<T> successor(INode<T> node) {
+		if (node.getRightChild() != null) {
+			return minimum(node.getRightChild());
+		}
+		INode<T> currentParent = node.getParent();
+		while (currentParent != null &&
+				currentParent.getRightChild().equals(node)) {
+			node = currentParent;
+			currentParent = node.getParent();
+		}
+		return currentParent;
+	}
+
+	// Validate this.
+	@Override
+	public INode<T> predecessor(INode<T> node) {
+		if (node.getLeftChild() != null) {
+			return maximum(node.getLeftChild());
+		}
+		INode<T> currentParent = node.getParent();
+		while (currentParent != null &&
+				currentParent.getLeftChild().equals(node)) {
+			node = currentParent;
+			currentParent = node.getParent();
+		}
+		return currentParent;
 	}
 }

@@ -20,6 +20,9 @@ public class Main {
 		tree.insert(3);
 		inorderTraversal(tree.getTree());
 		System.out.println(tree.height());
+		if (tree.search(2)) {
+			System.out.println("Found 2");
+		}
 	}
 
 	private static void inorderTraversal(final INode<Integer> root) {

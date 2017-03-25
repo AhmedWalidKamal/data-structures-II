@@ -4,13 +4,13 @@ import eg.edu.alexu.csd.filestructure.avl.node.INode;
 
 public interface IBST<T extends Comparable<T>> {
 	/**
-	* Insert the given value using the key
-	* @param key the value to be inserted in the tree
+	* Insert the given node into the tree
+	* @param node to be inserted
 	*/
 	void insert(INode<T> node);
 	/**
-	* Delete the key (if exists)
-	* @param key the key of the node
+	* Delete the node (if exists)
+	* @param node to be deleted
 	* @return true if node deleted, false if not exists
 	*/
 	boolean delete(INode<T> node);
@@ -31,4 +31,12 @@ public interface IBST<T extends Comparable<T>> {
 	* @return root of the AVL tree.
 	*/
 	INode<T> getTree();
+
+	INode<T> minimum(INode<T> root);
+
+	INode<T> maximum(INode<T> root);
+
+	INode<T> successor(INode<T> node);
+
+	INode<T> predecessor(INode<T> node);
 }
