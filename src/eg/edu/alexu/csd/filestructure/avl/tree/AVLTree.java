@@ -92,10 +92,12 @@ extends BST<T> implements IAVLTree<T>  {
 
 	@Override
 	public boolean delete(final T key) {
-		INode<T> newNode = new Node<T>(key);
-		boolean foundNode = super.delete(newNode);
-		// TODO: Rebalance tree.
-
-		return foundNode;
+		INode<T> nodeToDelete = new Node<>(key);
+		INode<T> startNode = super.delete(nodeToDelete);
+		if (startNode == null) {
+			return false;
+		}
+		rebalance(startNode);
+		return true;
 	}
 }

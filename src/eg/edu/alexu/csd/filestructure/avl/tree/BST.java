@@ -6,12 +6,14 @@ import eg.edu.alexu.csd.filestructure.avl.node.Node;
 public class BST<T extends Comparable<T>> implements IBST<T> {
 
 	protected INode<T> root = null;
+	protected int size = 0;
 
 	public BST() {
 	}
 
 	public BST(final T rootValue) {
 		this.root = new Node<T>(rootValue);
+		this.size++;
 	}
 
 	@Override
@@ -33,17 +35,21 @@ public class BST<T extends Comparable<T>> implements IBST<T> {
 		} else {
 			node.getParent().setRightChild(node);
 		}
+		this.size++;
 	}
 
 	@Override
-	public boolean delete(INode<T> node) {
+	public INode<T> delete(INode<T> node) {
 		node = find(node.getValue());
 		if (node == null) {
-			return false;
+			return null;
 		}
+		INode<T> returnedNode = node;
 		if (node.getLeftChild() == null) {
+			returnedNode = node.getRightChild();
 			transplant(node, node.getRightChild());
 		} else if (node.getRightChild() == null) {
+			returnedNode = node.getLeftChild();
 			transplant(node, node.getLeftChild());
 		} else {
 			INode<T> successor = minimum(node.getRightChild());
@@ -51,18 +57,22 @@ public class BST<T extends Comparable<T>> implements IBST<T> {
 				transplant(successor, successor.getRightChild());
 				successor.setRightChild(node.getRightChild());
 				successor.getRightChild().setParent(successor);
+				returnedNode = successor.getRightChild();
+			} else {
+				returnedNode = successor;
 			}
 			transplant(node, successor);
 			successor.setLeftChild(node.getLeftChild());
 			successor.getLeftChild().setParent(successor);
 		}
-		return true;
+		this.size--;
+		return returnedNode;
 	}
 
 	private void transplant(final INode<T> subtree1, final INode<T> subtree2) {
 		if (subtree1.getParent() == null) {
-			subtree2.setParent(null);
-		} else if (subtree1.getParent().getLeftChild().equals(subtree1)) {
+			this.root = subtree2;
+		} else if (subtree1.equals(subtree1.getParent().getLeftChild())) {
 			subtree1.getParent().setLeftChild(subtree2);
 		} else {
 			subtree1.getParent().setRightChild(subtree2);
@@ -151,5 +161,10 @@ public class BST<T extends Comparable<T>> implements IBST<T> {
 			currentParent = node.getParent();
 		}
 		return currentParent;
+	}
+
+	@Override
+	public int size() {
+		return this.size;
 	}
 }
